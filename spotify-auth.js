@@ -1,6 +1,6 @@
 // ====== CONFIG (HIER ANPASSEN) ======
-export const SPOTIFY_CLIENT_ID = "DEINE_CLIENT_ID_HIER";
-export const REDIRECT_URI = "https://DEINUSERNAME.github.io/DEINREPO/callback.html";
+export const SPOTIFY_CLIENT_ID = "a5c8f595cbf54432975e26c4cb55762f";
+export const REDIRECT_URI = "https://ilirkonda.github.io/Ilir-CarOS//callback.html";
 // Beispiel: https://ilir123.github.io/car-dashboard/callback.html
 
 // ====== SCOPES ======
