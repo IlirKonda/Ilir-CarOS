@@ -1,8 +1,5 @@
-//import { spotifyLogin, getAccessToken } from "./spotify-auth.js";
-//import { getPlayer, play, pause, nextTrack, prevTrack } from "./spotify.js";
-
-//Test ob Die App.js geladen wird --> wieder löschen wenn alles passt
-alert("app.js geladen");
+import { spotifyLogin, getAccessToken } from "./spotify-auth.js";
+import { getPlayer, play, pause, nextTrack, prevTrack } from "./spotify.js";
 
 // ===== Ilir CarOS Theme: Uhrzeit-only (Sommer/Winter) =====
 const THEME_LS_KEY = "theme_mode"; // "auto" | "day" | "night"
@@ -227,4 +224,5 @@ if ("serviceWorker" in navigator) {
   });
 
 }
+
 
