@@ -271,3 +271,41 @@ html[data-theme="night"] body::after{ opacity:0.6; }
   .txt{ display:none; }        /* icons only in portrait */
   .pill{ padding:10px 10px; }
 }
+
+/* Spotify big cover */
+.spHero{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:18px;
+  padding:12px;
+  background: rgba(0,0,0,0.18);
+}
+
+.spCover{
+  width:110px;
+  height:110px;
+  border-radius:16px;
+  object-fit:cover;
+  background:#000;
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.spMeta{ display:flex; flex-direction:column; gap:6px; }
+
+/* Optional: blurred cover background only in Spotify view */
+.view[data-view="spotify"] .panel{ position:relative; }
+.view[data-view="spotify"] .panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: var(--sp-bg, none);
+  background-size: cover;
+  background-position:center;
+  filter: blur(24px);
+  opacity: 0.20;
+  z-index:0;
+  pointer-events:none;
+}
+.view[data-view="spotify"] .panel > *{ position:relative; z-index:1; }
