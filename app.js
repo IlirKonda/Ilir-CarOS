@@ -208,7 +208,7 @@ async function refreshSpotify() {
     if (spCover) {
       if (img) {
         spCover.src = img;
-        //document.documentElement.style.setProperty("--sp-bg", `url("${img}")`);
+        document.documentElement.style.setProperty("--sp-bg", `url("${img}")`);
       } else {
         spCover.removeAttribute("src");
         document.documentElement.style.setProperty("--sp-bg", "none");
@@ -245,6 +245,7 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
 
 
 
