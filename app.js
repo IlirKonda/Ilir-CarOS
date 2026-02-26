@@ -201,24 +201,25 @@ async function refreshSpotify() {
       return;
     }
 
+    const spCover = document.getElementById("spCover");
+    const img = data.item?.album?.images?.[0]?.url;
+    
+    if (spCover) {
+      if (img) {
+        spCover.src = img;
+        document.documentElement.style.setProperty("--sp-bg", `url("${img}")`);
+      } else {
+        spCover.removeAttribute("src");
+        document.documentElement.style.setProperty("--sp-bg", "none");
+      }
+    }
+
     isPlaying = !!data.is_playing;
     if (spStatus) spStatus.textContent = "Verbunden";
     if (spNow) spNow.textContent = formatTrack(data.item);
     if (spDevice) spDevice.textContent = "Device: " + (data.device?.name || "—");
   } catch (e) {
     handleSpotifyError(e);
-  }
-  const spCover = document.getElementById("spCover");
-  const img = data.item?.album?.images?.[0]?.url;
-  
-  if (spCover) {
-    if (img) {
-      spCover.src = img;
-      document.documentElement.style.setProperty("--sp-bg", `url("${img}")`);
-    } else {
-      spCover.removeAttribute("src");
-      document.documentElement.style.setProperty("--sp-bg", "none");
-    }
   }
 }
 
@@ -243,4 +244,5 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
 
