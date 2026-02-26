@@ -201,9 +201,10 @@ async function refreshSpotify() {
       return;
     }
 
+    //Albumcover setzen
     const spCover = document.getElementById("spCover");
     const img = data.item?.album?.images?.[0]?.url;
-    
+
     if (spCover) {
       if (img) {
         spCover.src = img;
@@ -244,5 +245,6 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
 
 
