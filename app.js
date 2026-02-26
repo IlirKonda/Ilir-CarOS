@@ -208,6 +208,18 @@ async function refreshSpotify() {
   } catch (e) {
     handleSpotifyError(e);
   }
+  const spCover = document.getElementById("spCover");
+  const img = data.item?.album?.images?.[0]?.url;
+  
+  if (spCover) {
+    if (img) {
+      spCover.src = img;
+      document.documentElement.style.setProperty("--sp-bg", `url("${img}")`);
+    } else {
+      spCover.removeAttribute("src");
+      document.documentElement.style.setProperty("--sp-bg", "none");
+    }
+  }
 }
 
 setInterval(refreshSpotify, 3000);
@@ -231,3 +243,4 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
