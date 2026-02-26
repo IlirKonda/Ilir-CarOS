@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#000000" />
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css" />
+  <title>Ilir CarOS</title>
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div>
+        <div class="title">Ilir CarOS</div>
+        <div class="hint" id="hint">Google Maps • Spotify</div>
+      </div>
+
+      <button class="pill" id="themeToggle">Theme: Auto</button>
+    </header>
+
+    <section class="grid">
+      <!-- NAVIGATION -->
+      <button class="card" id="btnNav">
+        <div class="emoji">🗺️</div>
+        <div class="label">Navigation</div>
+        <div class="sub" id="navSub">Ziel: (nicht gesetzt)</div>
+      </button>
+
+      <!-- SETTINGS -->
+      <button class="card ghost" id="btnSettings">
+        <div class="emoji">⚙️</div>
+        <div class="label">Setup</div>
+        <div class="sub">Ziel setzen</div>
+      </button>
+
+      <!-- SPOTIFY CONNECT -->
+      <button class="card" id="btnSpotifyConnect">
+        <div class="emoji">🔐</div>
+        <div class="label">Spotify verbinden</div>
+        <div class="sub" id="spStatus">Login für Controls</div>
+      </button>
+
+      <!-- SPOTIFY CONTROLS -->
+      <div class="card" id="spCard" style="display:none;">
+        <div class="row">
+          <div>
+            <div class="label">🎵 Spotify</div>
+            <div class="sub" id="spNow">—</div>
+          </div>
+          <button class="pill" id="spOpen">App öffnen</button>
+        </div>
+
+        <div class="controls">
+          <button class="ctrl" id="spPrev" aria-label="Previous">⏮</button>
+          <button class="ctrl" id="spPlayPause" aria-label="Play/Pause">⏯</button>
+          <button class="ctrl" id="spNext" aria-label="Next">⏭</button>
+        </div>
+
+        <div class="sub" id="spDevice">Device: —</div>
+      </div>
+    </section>
+
+    <footer class="bottom">
+      <div class="small">
+        Tipp: In Safari → Teilen → „Zum Home-Bildschirm“ hinzufügen.
+      </div>
+    </footer>
+  </main>
+
+  <!-- SETTINGS DIALOG -->
+  <dialog id="dlg">
+    <form method="dialog" class="dlg">
+      <h2>Setup</h2>
+
+      <label>
+        Ziel (Adresse oder “lat,lng”):
+        <input id="dest" placeholder="z.B. Stephansplatz Wien" />
+      </label>
+
+      <menu>
+        <button value="cancel" class="btn">Abbrechen</button>
+        <button value="save" class="btn primary" id="save">Speichern</button>
+      </menu>
+
+      <p class="tiny">
+        Navigation öffnet Google Maps (App → Web Fallback). Spotify Controls brauchen Premium.
+      </p>
+    </form>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

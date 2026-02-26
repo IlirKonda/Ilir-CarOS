@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spotify Callback</title>
+</head>
+<body>
+  <p>Spotify Login…</p>
+
+  <script type="module">
+    import { handleSpotifyCallback } from "./spotify-auth.js";
+
+    handleSpotifyCallback()
+      .then(() => window.location.href = "./")
+      .catch(err => {
+        document.body.innerHTML = "<pre>" + String(err?.stack || err) + "</pre>";
+      });
+  </script>
+</body>
+</html>

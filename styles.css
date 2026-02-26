@@ -1,0 +1,267 @@
+:root{
+  --bg:#000;
+  --fg:#fff;
+  --muted:#9aa0a6;
+
+  --card: rgba(15,15,15,0.65);
+  --card2: rgba(15,15,15,0.45);
+  --stroke: rgba(255,255,255,0.08);
+
+  --pad:18px;
+  --radius:24px;
+
+  font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* DAY THEME */
+html[data-theme="day"]{
+  --bg:#0b0f14;
+  --fg:#ffffff;
+  --muted:#a9b2bb;
+
+  --card: rgba(18,22,28,0.62);
+  --card2: rgba(18,22,28,0.42);
+  --stroke: rgba(255,255,255,0.10);
+}
+
+/* NIGHT THEME */
+html[data-theme="night"]{
+  --bg:#000000;
+  --fg:#ffffff;
+  --muted:#8f98a3;
+
+  --card: rgba(10,10,10,0.72);
+  --card2: rgba(10,10,10,0.52);
+  --stroke: rgba(255,255,255,0.08);
+}
+
+/* Base layout */
+*{ box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  margin:0;
+  color:var(--fg);
+  position:relative;
+  overflow:hidden;
+  background: var(--bg);
+}
+
+/* Ilir CarOS background layers */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(31,111,235,0.22), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(255,45,85,0.14), transparent 45%),
+    linear-gradient(135deg, var(--bg) 0%, #0b0f14 100%);
+  z-index:-2;
+}
+
+/* Night: reduce glow for less distraction */
+html[data-theme="night"] body::before{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(31,111,235,0.10), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(255,45,85,0.06), transparent 50%),
+    linear-gradient(135deg, #000 0%, #05070a 100%);
+}
+
+/* Subtle moving light (premium feel) */
+body::after{
+  content:"";
+  position:fixed;
+  inset:-50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+  animation: moveGlow 18s linear infinite;
+  z-index:-1;
+}
+
+/* Reduce animation in night mode (less “busy”) */
+html[data-theme="night"] body::after{
+  opacity: 0.6;
+}
+
+@keyframes moveGlow {
+  0%   { transform: translate(0%,0%) rotate(0deg); }
+  50%  { transform: translate(20%,10%) rotate(180deg); }
+  100% { transform: translate(0%,0%) rotate(360deg); }
+}
+
+.wrap{
+  height:100%;
+  padding:
+    calc(env(safe-area-inset-top) + var(--pad))
+    calc(env(safe-area-inset-right) + var(--pad))
+    calc(env(safe-area-inset-bottom) + var(--pad))
+    calc(env(safe-area-inset-left) + var(--pad));
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:12px;
+}
+
+/* Ilir CarOS title gradient */
+.title{
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:1px;
+  background: linear-gradient(90deg, #1f6feb, #ff2d55);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hint{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* Layout */
+.grid{
+  flex:1;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:16px;
+}
+
+/* Cards: Glass + subtle glow */
+.card{
+  border-radius: var(--radius);
+  border:1px solid var(--stroke);
+  backdrop-filter: blur(20px);
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  color:var(--fg);
+  text-align:left;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  min-height: 150px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card:hover{
+  border-color: rgba(31,111,235,0.35);
+  box-shadow: 0 0 30px rgba(31,111,235,0.14);
+}
+
+.card:active{
+  transform: scale(0.98);
+}
+
+.ghost{
+  background: rgba(0,0,0,0.18);
+}
+
+.emoji{ font-size:34px; }
+.label{ font-size:22px; font-weight:800; }
+.sub{ color:var(--muted); font-size:14px; line-height:1.25; }
+
+.row{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+
+/* Pills (Theme / Open Spotify) */
+.pill{
+  border:1px solid var(--stroke);
+  background: rgba(0,0,0,0.35);
+  color:var(--fg);
+  padding:10px 12px;
+  border-radius:999px;
+  font-weight:800;
+}
+
+.controls{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+
+/* Spotify controls: “M-style” */
+.ctrl{
+  flex:1;
+  min-height:64px;
+  font-size:28px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(145deg, rgba(15,15,15,0.7), rgba(26,26,26,0.7));
+  color:var(--fg);
+  font-weight:900;
+}
+
+.ctrl:active{
+  background: #1f6feb;
+  box-shadow: 0 0 22px rgba(31,111,235,0.55);
+  transform: scale(0.99);
+}
+
+.bottom{ color:var(--muted); font-size:12px; }
+.small{ opacity:0.9; }
+
+/* Dialog */
+dialog::backdrop{ background: rgba(0,0,0,0.6); }
+
+.dlg{
+  width:min(520px, 92vw);
+  background: rgba(10,10,10,0.92);
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  padding:18px;
+  color:var(--fg);
+  backdrop-filter: blur(16px);
+}
+
+.dlg h2{ margin:0 0 12px 0; }
+
+.dlg label{
+  display:block;
+  margin:12px 0;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.dlg input{
+  width:100%;
+  margin-top:8px;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background:#000;
+  color:var(--fg);
+  font-size:16px;
+}
+
+menu{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  padding:0;
+  margin:14px 0 0;
+}
+
+.btn{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background: rgba(17,17,17,0.8);
+  color:var(--fg);
+  font-weight:800;
+}
+
+.primary{
+  background:#1f6feb;
+  border-color:#1f6feb;
+}
+
+.tiny{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
