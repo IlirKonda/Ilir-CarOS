@@ -1,5 +1,5 @@
-import { spotifyLogin, getAccessToken } from "./spotify-auth.js";
-import { getPlayer, play, pause, nextTrack, prevTrack } from "./spotify.js";
+//import { spotifyLogin, getAccessToken } from "./spotify-auth.js";
+//import { getPlayer, play, pause, nextTrack, prevTrack } from "./spotify.js";
 
 //Test ob Die App.js geladen wird --> wieder löschen wenn alles passt
 alert("app.js geladen");
@@ -227,3 +227,4 @@ if ("serviceWorker" in navigator) {
   });
 
 }
+
