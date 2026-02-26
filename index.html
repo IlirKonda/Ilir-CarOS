@@ -13,90 +13,128 @@
 </head>
 
 <body>
-  <main class="wrap">
-    <header class="top">
-      <div>
-        <div class="title">Ilir CarOS</div>
-        <div class="hint" id="hint">Google Maps • Spotify</div>
+  <div class="shell">
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="brand">
+        <div class="brandTitle">Ilir CarOS</div>
+        <div class="brandSub">Maps • Spotify</div>
       </div>
+
+      <button class="navbtn" id="tabNav" data-view="nav">
+        <span class="ico">🗺️</span>
+        <span class="txt">Navigation</span>
+      </button>
+
+      <button class="navbtn" id="tabSpotify" data-view="spotify">
+        <span class="ico">🎵</span>
+        <span class="txt">Spotify</span>
+      </button>
+
+      <button class="navbtn" id="tabSetup" data-view="setup">
+        <span class="ico">⚙️</span>
+        <span class="txt">Setup</span>
+      </button>
+
+      <div class="spacer"></div>
 
       <button class="pill" id="themeToggle">Theme: Auto</button>
-    </header>
+    </nav>
 
-    <section class="grid">
-      <!-- NAVIGATION -->
-      <button class="card" id="btnNav">
-        <div class="emoji">🗺️</div>
-        <div class="label">Navigation</div>
-        <div class="sub" id="navSub">Ziel: (nicht gesetzt)</div>
-      </button>
-
-      <!-- SETTINGS -->
-      <button class="card ghost" id="btnSettings">
-        <div class="emoji">⚙️</div>
-        <div class="label">Setup</div>
-        <div class="sub">Ziel setzen</div>
-      </button>
-
-      <!-- SPOTIFY CONNECT -->
-      <button class="card" id="btnSpotifyConnect">
-        <div class="emoji">🔐</div>
-        <div class="label">Spotify verbinden</div>
-        <div class="sub" id="spStatus">Login für Controls</div>
-      </button>
-
-      <!-- SPOTIFY CONTROLS -->
-      <div class="card" id="spCard" style="display:none;">
-        <div class="row">
+    <!-- MAIN STAGE -->
+    <main class="stage">
+      <!-- NAV VIEW -->
+      <section class="view" id="viewNav" data-view="nav">
+        <header class="viewHeader">
           <div>
-            <div class="label">🎵 Spotify</div>
-            <div class="sub" id="spNow">—</div>
+            <div class="viewTitle">Navigation</div>
+            <div class="viewSub" id="navSub">Ziel: (nicht gesetzt)</div>
           </div>
-          <button class="pill" id="spOpen">App öffnen</button>
+
+          <div class="viewActions">
+            <button class="btn primary" id="btnNavStart">Start</button>
+          </div>
+        </header>
+
+        <div class="panel">
+          <!-- optional map preview iframe -->
+          <iframe
+            id="mapFrame"
+            class="map"
+            title="Map Preview"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="about:blank"></iframe>
+
+          <div class="note">
+            Tipp: Für echte Turn-by-turn Navigation öffnet “Start” Google Maps (App → Web Fallback).
+          </div>
         </div>
+      </section>
 
-        <div class="controls">
-          <button class="ctrl" id="spPrev" aria-label="Previous">⏮</button>
-          <button class="ctrl" id="spPlayPause" aria-label="Play/Pause">⏯</button>
-          <button class="ctrl" id="spNext" aria-label="Next">⏭</button>
+      <!-- SPOTIFY VIEW -->
+      <section class="view" id="viewSpotify" data-view="spotify" style="display:none;">
+        <header class="viewHeader">
+          <div>
+            <div class="viewTitle">Spotify</div>
+            <div class="viewSub" id="spStatus">Nicht verbunden</div>
+          </div>
+
+          <div class="viewActions">
+            <button class="btn" id="btnSpotifyConnect">Verbinden</button>
+            <button class="btn" id="spOpen">App öffnen</button>
+          </div>
+        </header>
+
+        <div class="panel">
+          <div class="nowPlaying">
+            <div class="npTitle" id="spNow">—</div>
+            <div class="npSub" id="spDevice">Device: —</div>
+          </div>
+
+          <div class="controls">
+            <button class="ctrl" id="spPrev" aria-label="Previous">⏮</button>
+            <button class="ctrl" id="spPlayPause" aria-label="Play/Pause">⏯</button>
+            <button class="ctrl" id="spNext" aria-label="Next">⏭</button>
+          </div>
+
+          <div class="note" id="spHint">
+            Wenn “kein aktiver Player”: Spotify kurz öffnen und Musik starten.
+          </div>
         </div>
+      </section>
 
-        <div class="sub" id="spDevice">Device: —</div>
-      </div>
-    </section>
+      <!-- SETUP VIEW -->
+      <section class="view" id="viewSetup" data-view="setup" style="display:none;">
+        <header class="viewHeader">
+          <div>
+            <div class="viewTitle">Setup</div>
+            <div class="viewSub">Ziel & Komfort</div>
+          </div>
+        </header>
 
-    <footer class="bottom">
-      <div class="small">
-        Tipp: In Safari → Teilen → „Zum Home-Bildschirm“ hinzufügen.
-      </div>
-    </footer>
-  </main>
+        <div class="panel">
+          <div class="form">
+            <label class="lbl">
+              Ziel (Adresse oder “lat,lng”)
+              <input class="inp" id="dest" placeholder="z.B. Stephansplatz Wien" />
+            </label>
 
-  <!-- SETTINGS DIALOG -->
-  <dialog id="dlg">
-    <form method="dialog" class="dlg">
-      <h2>Setup</h2>
+            <div class="rowBtns">
+              <button class="btn primary" id="saveDest">Speichern</button>
+              <button class="btn" id="testMaps">Maps öffnen</button>
+            </div>
 
-      <label>
-        Ziel (Adresse oder “lat,lng”):
-        <input id="dest" placeholder="z.B. Stephansplatz Wien" />
-      </label>
+            <div class="note">
+              Änderungen sind sofort aktiv. Navigation-Preview aktualisiert sich automatisch.
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <menu>
-        <button value="cancel" class="btn">Abbrechen</button>
-        <button value="save" class="btn primary" id="save">Speichern</button>
-      </menu>
+    </main>
+  </div>
 
-      <p class="tiny">
-        Navigation öffnet Google Maps (App → Web Fallback). Spotify Controls brauchen Premium.
-      </p>
-    </form>
-  </dialog>
-
-  <script type="module">
-    import("./app.js")
-      .catch(e => alert("Module-Load Fehler:\n" + (e?.message || e)));
-  </script>
+  <script type="module" src="app.js"></script>
 </body>
-
 </html>
