@@ -76,7 +76,11 @@ body::after{
   animation: moveGlow 18s linear infinite;
   z-index:-1;
 }
-
+/*Background-Layer dürfen keine Touches fressen*/
+body::before,
+body::after{
+  pointer-events: none;
+}
 /* Reduce animation in night mode (less “busy”) */
 html[data-theme="night"] body::after{
   opacity: 0.6;
@@ -264,4 +268,5 @@ menu{
   margin:12px 0 0;
   color:var(--muted);
   font-size:12px;
+
 }
