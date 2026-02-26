@@ -93,6 +93,10 @@
     </form>
   </dialog>
 
-  <script type="module" src="app.js"></script>
+  <script type="module">
+    import("./app.js")
+      .catch(e => alert("Module-Load Fehler:\n" + (e?.message || e)));
+  </script>
 </body>
+
 </html>
