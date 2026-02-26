@@ -1,6 +1,6 @@
 // ====== CONFIG (HIER ANPASSEN) ======
 export const SPOTIFY_CLIENT_ID = "a5c8f595cbf54432975e26c4cb55762f";
-export const REDIRECT_URI = "https://ilirkonda.github.io/Ilir-CarOS//callback.html";
+export const REDIRECT_URI = "https://ilirkonda.github.io/Ilir-CarOS/callback.html";
 // Beispiel: https://ilir123.github.io/car-dashboard/callback.html
 
 // ====== SCOPES ======
@@ -115,4 +115,5 @@ export async function refreshAccessToken() {
 
 export function spotifyLogout() {
   Object.values(LS).forEach(k => localStorage.removeItem(k));
+
 }
